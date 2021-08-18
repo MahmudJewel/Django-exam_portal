@@ -1,0 +1,3 @@
+admin-student: 
+	i) pic load
+	ii) student update of user section
