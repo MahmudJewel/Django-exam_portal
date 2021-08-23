@@ -6,17 +6,20 @@ from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
- 
+from admn import forms
 
 from student import models as SMODEL
 from student import forms as SFORM
 
+from teacher import models as TMODEL
+from teacher import forms as TFORM
+
+from home import models as HMODEL
+from teacher import forms as HFORM
 
 
 
-
-
-# Create your views here.
+#=============================start Admin-Dashboard ===============================
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -27,11 +30,17 @@ def adminclick_view(request):
 def admin_dashboard_view(request):
     context={
     'total_student':SMODEL.Student.objects.all().count(),
-    #'total_teacher':TMODEL.Teacher.objects.all().filter(status=True).count(),
-    #'total_course':models.Course.objects.all().count(),
-    #'total_question':models.Question.objects.all().count(),
+    'total_teacher':TMODEL.Teacher.objects.all().filter(status=True).count(),
+    'total_course':HMODEL.Course.objects.all().count(),
+    'total_question':HMODEL.Question.objects.all().count(),
     }
     return render(request,'admn/admin_dashboard.html', context)
+
+# See student section for total student
+# See teacher section for total teacher
+# See Courses section for total Courses
+# See Questions section for total Questions
+#=============================End Admin-Dash ===============================
 
 
 #=============================start Admin-student ===============================
@@ -87,3 +96,86 @@ def delete_student_view(request,pk):
 
 #=============================End Admin-student ===============================
 
+
+#=============================start Admin-teacher ===============================
+
+@login_required(login_url='adminlogin')
+def admin_teacher_view(request):
+    context={
+    'total_teacher':TMODEL.Teacher.objects.all().filter(status=True).count(),
+    'pending_teacher':TMODEL.Teacher.objects.all().filter(status=False).count(),
+    #'salary':TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
+    }
+    return render(request,'admn/admin_teacher.html',context)
+
+@login_required(login_url='adminlogin')
+def admin_view_teacher_view(request):
+    teachers= TMODEL.Teacher.objects.all().filter(status=True)
+    return render(request,'admn/admin_view_teacher.html',{'teachers':teachers})
+
+@login_required(login_url='adminlogin')
+def update_teacher_view(request,pk):
+    teacher=TMODEL.Teacher.objects.get(id=pk)
+    user=TMODEL.User.objects.get(id=teacher.user_id)
+    userForm=TFORM.TeacherUserForm(instance=user)
+    teacherForm=TFORM.TeacherForm(request.FILES, instance=teacher)
+    context={
+    'userForm':userForm,
+    'teacherForm':teacherForm
+    }
+
+    if request.method=='POST':
+        userForm=TFORM.TeacherUserForm(request.POST,instance=user)
+        teacherForm=TFORM.TeacherForm(request.POST,request.FILES,instance=teacher)
+        if userForm.is_valid() and teacherForm.is_valid():
+            user=userForm.save()
+            user.set_password(user.password)
+            user.save()
+            teacherForm.save()
+            return redirect('admin-view-teacher')
+    return render(request,'admn/update_teacher.html',context)
+
+@login_required(login_url='adminlogin')
+def delete_teacher_view(request, pk):
+    teacher=TMODEL.Teacher.objects.get(id=pk)
+    user=User.objects.get(id=teacher.user_id)
+    user.delete()
+    teacher.delete()
+    return HttpResponseRedirect('/admin-view-teacher')
+
+
+
+@login_required(login_url='adminlogin')
+def admin_view_pending_teacher_view(request):
+    teachers= TMODEL.Teacher.objects.all().filter(status=False)
+    return render(request,'admn/admin_view_pending_teacher.html',{'teachers':teachers})
+
+@login_required(login_url='adminlogin')
+def approve_teacher_view(request,pk):
+    teacherSalary=forms.TeacherSalaryForm()
+    if request.method=='POST':
+        teacherSalary=forms.TeacherSalaryForm(request.POST)
+        if teacherSalary.is_valid():
+            teacher=TMODEL.Teacher.objects.get(id=pk)
+            teacher.salary=teacherSalary.cleaned_data['salary']
+            teacher.status=True
+            teacher.save()
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/admin-view-pending-teacher')
+    return render(request,'admn/salary_form.html',{'teacherSalary':teacherSalary})
+
+@login_required(login_url='adminlogin')
+def reject_teacher_view(request,pk):
+    teacher=TMODEL.Teacher.objects.get(id=pk)
+    user=User.objects.get(id=teacher.user_id)
+    user.delete()
+    teacher.delete()
+    return HttpResponseRedirect('/admin-view-pending-teacher')
+
+@login_required(login_url='adminlogin')
+def admin_view_teacher_salary_view(request):
+    teachers= TMODEL.Teacher.objects.all().filter(status=True)
+    return render(request,'admn/admin_view_teacher_salary.html',{'teachers':teachers})
+
+#=============================End Admin-teacher ===============================

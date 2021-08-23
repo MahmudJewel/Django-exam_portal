@@ -1,3 +1,10 @@
 admin-student: 
 	i) pic load
 	ii) student update of user section
+	iii) add marks
+	iv) check marks
+	
+admin-dashboard: Dynami-profile pic
+
+	
+	
