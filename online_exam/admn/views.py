@@ -17,6 +17,9 @@ from teacher import forms as TFORM
 from home import models as HMODEL
 from teacher import forms as HFORM
 
+from admn import models
+from admn import forms
+
 
 
 #=============================start Admin-Dashboard ===============================
@@ -179,3 +182,34 @@ def admin_view_teacher_salary_view(request):
     return render(request,'admn/admin_view_teacher_salary.html',{'teachers':teachers})
 
 #=============================End Admin-teacher ===============================
+
+
+#=============================End Course ===============================
+@login_required(login_url='adminlogin')
+def admin_course_view(request):
+    return render(request,'admn/admin_course.html')
+
+@login_required(login_url='adminlogin')
+def admin_add_course_view(request):
+    courseForm=forms.CourseForm()
+    if request.method=='POST':
+        courseForm=forms.CourseForm(request.POST)
+        if courseForm.is_valid():        
+            courseForm.save()
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/admin-view-course')
+    return render(request,'admn/admin_add_course.html',{'courseForm':courseForm})
+
+@login_required(login_url='adminlogin')
+def admin_view_course_view(request):
+    courses = models.Course.objects.all()
+    return render(request,'admn/admin_view_course.html',{'courses':courses})
+
+@login_required(login_url='adminlogin')
+def delete_course_view(request,pk):
+    course=models.Course.objects.get(id=pk)
+    course.delete()
+    return HttpResponseRedirect('/admin-view-course')
+
+#=============================End Course ===============================

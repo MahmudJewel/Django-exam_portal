@@ -25,5 +25,9 @@ urlpatterns = [
     path('approve-teacher/<int:pk>', views.approve_teacher_view,name='approve-teacher'),
     path('reject-teacher/<int:pk>', views.reject_teacher_view,name='reject-teacher'),
 
+    path('admin-course', views.admin_course_view, name='admin-course'),
+    path('admin-add-course', views.admin_add_course_view,name='admin-add-course'),
+    path('admin-view-course', views.admin_view_course_view,name='admin-view-course'),
+    path('delete-course/<int:pk>', views.delete_course_view,name='delete-course'),
 
 ]

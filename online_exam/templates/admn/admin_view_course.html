@@ -1,6 +1,6 @@
 {% extends 'admn/adminbase.html' %}
 {% block content %}
-{% load static %}
+{%load static%}
 
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -25,31 +25,26 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Teachers</h6>
+      <h6 class="panel-title">Courses</h6>
     </div>
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>
 
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-         
-          <th>Update</th>
+          <th>Course Name</th>
+          <th>Total Question</th>
+          <th>Total Marks</th>
           <th>Delete</th>
         </tr>
       </thead>
-      {% for t in teachers %}
+      {% for t in courses %}
       <tr>
 
-        <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{t.mobile}}</td>
-        <td>{{t.address}}</td>
+        <td> {{t.course_name}}</td>
+        <td>{{t.question_number}}</td>
+        <td>{{t.total_marks}}</td>
         
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-teacher' t.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-teacher' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-course' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
       </tr>
       {% endfor %}
     </table>
