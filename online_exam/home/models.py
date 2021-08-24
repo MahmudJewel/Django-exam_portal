@@ -1,3 +1,4 @@
+'''
 from django.db import models
 
 from student.models import Student
@@ -25,3 +26,4 @@ class Result(models.Model):
     marks = models.PositiveIntegerField()
     date = models.DateTimeField(auto_now=True)
 
+'''

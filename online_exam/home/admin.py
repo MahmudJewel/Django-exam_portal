@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Course, Question, Result
+#from home.models import Course, Question, Result
 
 # Register your models here.
 #admin.site.register(Course)
