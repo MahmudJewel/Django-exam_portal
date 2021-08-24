@@ -34,8 +34,8 @@ def admin_dashboard_view(request):
     context={
     'total_student':SMODEL.Student.objects.all().count(),
     'total_teacher':TMODEL.Teacher.objects.all().filter(status=True).count(),
-    'total_course':HMODEL.Course.objects.all().count(),
-    'total_question':HMODEL.Question.objects.all().count(),
+    'total_course':models.Course.objects.all().count(),
+    'total_question':models.Question.objects.all().count(),
     }
     return render(request,'admn/admin_dashboard.html', context)
 
@@ -213,3 +213,44 @@ def delete_course_view(request,pk):
     return HttpResponseRedirect('/admin-view-course')
 
 #=============================End Course ===============================
+
+
+#=============================start Question ===============================
+@login_required(login_url='adminlogin')
+def admin_question_view(request):
+    return render(request,'admn/admin_question.html')
+
+@login_required(login_url='adminlogin')
+def admin_add_question_view(request):
+    questionForm=forms.QuestionForm()
+    if request.method=='POST':
+        questionForm=forms.QuestionForm(request.POST)
+        if questionForm.is_valid():
+            question=questionForm.save(commit=False)
+            course=models.Course.objects.get(id=request.POST.get('courseID'))
+            question.course=course
+            question.save()       
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/admin-view-question')
+    return render(request,'admn/admin_add_question.html',{'questionForm':questionForm})
+
+@login_required(login_url='adminlogin')
+def admin_view_question_view(request):
+    courses= models.Course.objects.all()
+    return render(request,'admn/admin_view_question.html',{'courses':courses})
+
+@login_required(login_url='adminlogin')
+def view_question_view(request,pk):
+    questions=models.Question.objects.all().filter(course_id=pk)
+    print('question list',questions)
+    return render(request,'admn/view_question.html',{'questions':questions})
+
+@login_required(login_url='adminlogin')
+def delete_question_view(request,pk):
+    question=models.Question.objects.get(id=pk)
+    question.delete()
+    return HttpResponseRedirect('/admin-view-question')
+
+
+#=============================End Question ===============================
