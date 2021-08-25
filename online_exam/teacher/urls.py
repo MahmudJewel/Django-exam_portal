@@ -22,7 +22,5 @@ path('teacher-view-question', views.teacher_view_question_view,name='teacher-vie
 path('see-question/<int:pk>', views.see_question_view,name='see-question'),
 path('remove-question/<int:pk>', views.remove_question_view,name='remove-question'),
 
-path('teacher-view-student', views.teacher_view_student,name='admin-view-student'),
-
-
+path('teacher-view-student', views.teacher_view_student,name='teacher-view-student'),
 ]

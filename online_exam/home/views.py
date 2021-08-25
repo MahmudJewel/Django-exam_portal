@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
-    #if request.user.is_authenticated:
-        #return HttpResponseRedirect('afterlogin')
-    return render(request, 'home/home.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('afterlogin') #url will be = afterlogin
+    return render(request, 'home/home.html') #url will be=url(app)+home/home.html
 
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
@@ -22,7 +22,8 @@ def afterlogin_view(request):
     #'''
     if is_student(request.user):
         print('A student', request.user)
-        return HttpResponseRedirect('student-dashboard') 
+        return redirect('student-dashboard') #url will be=url(app)+student-dashboard
+        #return HttpResponseRedirect('student-dashboard') #url will be = 'student-dashboard'
     elif is_teacher(request.user):
         return redirect('teacher/teacher-dashboard')
     else:
