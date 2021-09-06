@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 def home(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin') #url will be = afterlogin
-    return render(request, 'home/home.html') #url will be=url(app)+home/home.html
+    return render(request, 'home/home.html')
 
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()

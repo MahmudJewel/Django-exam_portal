@@ -27,7 +27,7 @@ def student_signup_view(request):
             user=userForm.save()
             user.set_password(user.password)
             user.save()
-            student=studentForm.save(commit=False) #This doesn't save the form data immediately.
+            student=studentForm.save(commit=False) #This doesn't save the form data immediately.wait for further changes.
             student.user=user
             student.save()
             my_student_group = Group.objects.get_or_create(name='STUDENT')
