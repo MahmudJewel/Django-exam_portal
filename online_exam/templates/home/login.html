@@ -1,10 +1,7 @@
-<!DOCTYPE html>
+{% extends 'home/base.html' %} 
 {% load widget_tweaks %}
-<html lang="en" dir="ltr">
+{% block content %}
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <meta charset="utf-8">
     <title>Login</title>
     <style media="screen">
       body {
@@ -78,8 +75,6 @@
 
     </style>
   </head>
-  <body>
-    {% include "home/nav.html" %}
     <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -99,9 +94,4 @@
         </div>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br>
-{% include "home/footer.html" %}
-  </body>
-</html>
+{% endblock %}

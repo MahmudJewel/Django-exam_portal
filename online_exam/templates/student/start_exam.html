@@ -14,7 +14,7 @@
 </head>
 
 
-<div class="jumbotron my-4">
+<div class="jumbotron my-4" style="min-height: 100vh;">
 
   <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
     {% csrf_token %}
@@ -84,5 +84,5 @@
 
 </script> 
 
-<br><br><br><br><br><br>
+<!-- <br><br><br><br><br><br> -->
 {% endblock content %}

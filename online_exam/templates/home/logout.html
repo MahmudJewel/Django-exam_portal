@@ -1,11 +1,7 @@
+
+{% extends 'home/base.html' %} 
 {%load static%}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <title>Logout</title>
-  </head>
+{% block content %}
   <body>
     {% include "home/nav.html" %}
     <br><br><br><br><br>
@@ -16,7 +12,4 @@
     </div>
 
 <br><br><br><br><br>
-{% include "home/footer.html" %}
-
-  </body>
-</html>
+{% endblock %}

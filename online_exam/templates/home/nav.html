@@ -11,6 +11,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <style type="text/css">
+  #navbarCollapse .active{
+        background: none;
+    }
     .bs-example {
       margin: 0px;
 
@@ -38,10 +41,10 @@
         <div class="navbar-nav"></div>
         <div class="navbar-nav">
            <a style="color: aqua;" href="/" class="nav-item nav-link">Home</a>
-          <a href="/teacher/teacherclick" class="nav-item nav-link" style="color:aqua;">Teacher</a>
-          <a href="/student/studentclick" class="nav-item nav-link" style="color:aqua;">Student</a>
-          <a href="/adminclick" class="nav-item nav-link" style="color:aqua;">Admin</a>
-          <a href="/login" class="btn btn-lg btn-info"> Log In</a>
+          <a href="/teacher/teacherclick" class="nav-item nav-link {% if 'teacher' in request.path %} active {% endif %}" style="color:aqua;">Teacher</a>
+          <a href="/student/studentclick" class="nav-item nav-link {% if 'student' in request.path %} active {% endif %}" style="color:aqua;">Student</a>
+          <a href="/adminclick" class="nav-item nav-link {% if 'adminlogin' in request.path %} active {% endif %}" style="color:aqua;">Admin</a>
+          <a href="/login" class="btn btn-lg btn-info {% if 'login' in request.path %} active {% endif %}"> Log In</a>
         </div>
       </div>
     </nav>
