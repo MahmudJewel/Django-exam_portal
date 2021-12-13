@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bootstrap 4.3 css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- bootstrap-4.3 js  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- font awesome 4.7 -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- font awesome 5.15-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <style type="text/css">
+    #navbarCollapse .active{
+        background: none;
+    }
+      .bs-example {
+        margin: 0px;
+      }
+      .bg-dark {
+        background-color: #212529 !important;
+      }
+      .navbar-brand {
+        font-size: 20px;
+        font-family: sans-serif;
+      }
+
+      .footerHeader {
+  padding: 0px 0px 0px 0px;
+  background-color: #212529;
+  margin: 0px;
+}
+.textColor {
+  color: blanchedalmond;
+}
+/* .activestatus {
+  background: white;
+} */
+/* ******************** end footer **************************** */
+
+    </style>
+  </head>
+
+  <body>
+    <div class="bs-example">
+      <nav
+        class="navbar navbar-expand-md navbar-dark fixed-top nav-tabs"
+        style="background-color: #637bad"
+      >
+        <a style="color: aqua; text-decoration: none" href="/"
+          ><font face="Comic sans MS" size=" 5">Online Exam</font><br
+        /></a>
+        <button
+          type="button"
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarCollapse"
+        >
+          <div class="navbar-nav"></div>
+          <div class="navbar-nav">
+            <a style="color: aqua" href="/" class="nav-item nav-link active {% if 'home' in request.path %} active {% endif %}">Home</a>
+            <a
+              href="/teacher/teacherclick"
+              class="nav-item nav-link {% if 'teacher' in request.path %} active {% endif %}"
+              style="color: aqua"
+              >Teacher</a
+            >
+            <a
+              href="/student/studentclick"
+              class="nav-item nav-link {% if 'student' in request.path %} active {% endif %}"
+              style="color: aqua"
+              >Student</a
+            >
+            <a href="/adminclick" class="nav-item nav-link {% if 'admin' in request.path %} active {% endif %}" style="color: aqua"
+              >Admin</a
+            >
+            <a href="/login" class="btn btn-lg btn-info {% if 'login' in request.path %} active {% endif %}"> Log In</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <br><br>
+    <!-- end nav-bar  -->
+
+ <!-- content  -->
+ <div style="min-height: 100vh; background: #EDF0F5;">{% block content %} {% endblock %}</div>
+
+    <!-- start footer  -->
+    <footer class="footerHeader">
+      <br /><br />
+      <div class="container">
+        <div class="row text-center textColor">
+          <p>Copyright &copy: tech villain</p>
+        </div>
+        <br />
+
+        <div class="row text-center">
+          <div class="col">
+            <a
+              class="m-3"
+              target="_blank"
+              href="http://mahmudjewel.herokuapp.com"
+            >
+              <i class="fas fa-user-circle fa-2x"></i>
+            </a>
+
+            <a
+              class="m-3"
+              target="_blank"
+              href="https://www.facebook.com/TechVillain.007"
+            >
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+
+            <a
+              class="m-3"
+              target="_blank"
+              href="https://www.youtube.com/channel/UCJCdq7lWqB7M5b16UatoTEw"
+            >
+              <i class="fab fa-youtube fa-2x"></i>
+            </a>
+
+            <a
+              class="m-3"
+              target="_blank"
+              href="https://www.linkedin.com/in/mahmudjewel"
+            >
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a
+              class="m-3"
+              target="_blank"
+              href="https://github.com/MahmudJewel"
+            >
+              <i class="fab fa-github fa-2x"></i>
+            </a>
+            <a
+              class="m-3"
+              target="_blank"
+              href="https://www.hackerrank.com/DJ_cse"
+            >
+              <i class="fab fa-hackerrank fa-2x"></i>
+            </a>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br /><br />
+      </div>
+    </footer>
+    <!-- end footer  -->
+  </body>
+</html>
