@@ -66,7 +66,7 @@ def admin_view_student_view(request): #middle view
 @login_required(login_url='adminlogin')
 def update_student_view(request,pk):
     student=SMODEL.Student.objects.get(id=pk)
-    user=SMODEL.User.objects.get(id=student.user_id) ### ???
+    user=SMODEL.User.objects.get(id=student.user_id) # user_id = automatically create to Student (model)
     print('students: ', student, 'user = ', user)
     userForm=SFORM.StudentUserForm(instance=user)
     studentForm=SFORM.StudentForm(request.FILES,instance=student)
@@ -77,8 +77,8 @@ def update_student_view(request,pk):
     }
 
     if request.method=='POST':
-        userForm=SFORM.StudentUserForm(request.POST,instance=user)
-        studentForm=SFORM.StudentForm(request.POST,request.FILES,instance=student)
+        userForm=SFORM.StudentUserForm(request.POST, instance=user)
+        studentForm=SFORM.StudentForm(request.POST, request.FILES,instance=student)
         if userForm.is_valid() and studentForm.is_valid():
             user=userForm.save()
             user.set_password(user.password)
