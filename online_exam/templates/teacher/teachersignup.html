@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends 'home/base.html' %}
+{% block content %}
+{% load static %}
 {% load widget_tweaks %}
-<html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,10 +17,6 @@
     </style>
   </head>
   <body>
-    {% include "home/nav.html" %}
- 
-
-
 <br><br><br>
 <h3 style="text-align: center;color: red;">TEACHER SIGNUP</h3>
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -70,6 +68,6 @@
 
 
 <br><br>
-{% include "home/footer.html" %}
+
   </body>
-</html>
+{% endblock %}

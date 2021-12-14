@@ -82,7 +82,7 @@
         >
           <div class="navbar-nav"></div>
           <div class="navbar-nav">
-            <a style="color: aqua" href="/" class="nav-item nav-link active {% if 'home' in request.path %} active {% endif %}">Home</a>
+            <a style="color: aqua" href="/" class="nav-item nav-link {% if request.get_full_path == '/' %} active {% endif %}">Home</a>
             <a
               href="/teacher/teacherclick"
               class="nav-item nav-link {% if 'teacher' in request.path %} active {% endif %}"
@@ -113,7 +113,7 @@
     <footer class="footerHeader">
       <br /><br />
       <div class="container">
-        <div class="row text-center textColor">
+        <div class="row text-center textColor d-flex justify-content-center">
           <p>Copyright &copy: tech villain</p>
         </div>
         <br />

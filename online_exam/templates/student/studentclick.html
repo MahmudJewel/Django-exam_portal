@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+{% extends 'home/base.html' %}
+{% block content %}
 {% load static %}
-<html lang="en" dir="ltr">
-
 <head>
   <title>Student home</title>
   <meta charset="utf-8">
@@ -20,12 +19,7 @@
   </style>
 
 </head>
-
-<body>
-
-  {% include "home/nav.html" %}
-  <br><br>
-  <div class="jumbotron" style="margin-bottom:0px;">
+  <div class="jumbotron text-center" style="margin-bottom:0px; min-height: 100vh;">
     <h1 class="display-4">Hello, Student</h1>
     <p class="lead">Welcome to Online Exam</p>
     <hr class="my-4">
@@ -36,8 +30,4 @@
     </p>
     <br><br><br><br><br><br>
   </div>
- 
-  {% include "home/footer.html" %}
-</body>
-
-</html>
+  {% endblock %}

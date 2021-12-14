@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends 'home/base.html' %}
+{% block content %}
+{% load static %}
 {% load widget_tweaks %}
-<html lang="en" dir="ltr">
+
   <head>
     <title>Student Signup</title>
     <meta charset="utf-8">
@@ -16,10 +18,6 @@
     </style>
   </head>
   <body>
-    {% include "home/nav.html" %}
- 
-
-
 <br><br><br>
 <h3 style="text-align: center;color: red;">STUDENT SIGNUP</h3>
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -68,9 +66,5 @@
 
     <button type="submit" class="btn btn-primary">Sign Up</button>
   </form>
-
-
-<br><br>
-{% include "home/footer.html" %}
   </body>
-</html>
+  {% endblock %}
