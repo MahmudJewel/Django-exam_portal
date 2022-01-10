@@ -193,14 +193,15 @@
 
 
   <!--content start-->
-  <div class="content">
+  <div class="content" >
     <br><br><br><br><br>
-    {% block content %}
+    <div style="min-height: 100vh;">
+      {% block content %}
 
     {% endblock content %}
+    </div>
+    
 
-
-    <br><br><br>
     {% include "home/footer.html" %}
   </div>
   <!--content end-->
